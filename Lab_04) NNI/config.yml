@@ -1,0 +1,21 @@
+authorName: Cheonseong                     
+experimentName: Lab04
+trialConcurrency: 2                 
+maxExecDuration: 48h                 
+maxTrialNum: 99999                   
+#choice: local, remote, pai
+trainingServicePlatform: local       
+#nniManagerIp:
+#choice: true, false
+searchSpacePath: search_space.json   
+useAnnotation: false                 
+tuner:                               
+  #choice: TPE, Random, Anneal, Evolution, BatchTuner, MetisTuner
+  #SMAC (SMAC should be installed through nnictl)
+  builtinTunerName: Anneal           
+  classArgs:
+    #choice: maximize, minimize
+    optimize_mode: minimize          
+trial:
+  command: python3 trial.py         
+  codeDir: .

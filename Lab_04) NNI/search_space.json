@@ -1,0 +1,5 @@
+{
+    "max_depth": {"_type":"randint", "_value":[2, 15]},
+    "subsample": {"_type":"uniform", "_value":[0.5, 1.0]},
+    "colsample_bytree": {"_type":"uniform", "_value":[0.5, 1.0]}
+}
