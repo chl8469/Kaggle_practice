@@ -1,0 +1,8 @@
+{
+    "max_depth": {"_type":"randint", "_value":[2, 20]},
+    "subsample": {"_type":"uniform", "_value":[0.5, 1.0]},
+    "colsample_bytree": {"_type":"uniform", "_value":[0.5, 1.0]},
+    "lr": {"_type":"loguniform", "_value":[0.1, 0.5]},
+    "scaler": {"_type":"choice", "_value":["minmax", "standard"]},
+    "bst_type": {"_type":"choice", "_value":["gbdt", "dart"]}
+}

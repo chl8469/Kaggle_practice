@@ -1,0 +1,8 @@
+{
+    "bagging_temperature": {"_type":"randint", "_value":[0, 10]},
+    "depth": {"_type":"randint", "_value":[1, 16]},
+    "learning_rate" : {"_type":"loguniform", "_value":[0.05,0.5]}, 
+    "min_data_in_leaf" : {"_type":"randint", "_value":[1,6]},
+    "border_count": {"_type":"randint", "_value":[1, 255]},
+    "scaler": {"_type":"choice", "_value":["minmax", "standard"]}
+}
