@@ -1,0 +1,7 @@
+{
+    "max_depth": 17,
+    "subsample": 0.922673956606362,
+    "colsample_bytree": 0.5207419913680738,
+    "lr": 0.1036444950112919,
+    "scaler": "standard"
+}
