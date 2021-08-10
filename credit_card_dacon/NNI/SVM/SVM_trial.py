@@ -10,8 +10,8 @@ import pandas as pd
 from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler, PowerTransformer
 from sklearn.metrics import log_loss
-from lightgbm import LGBMClassifier
 from category_encoders.ordinal import OrdinalEncoder
+from sklearn.svm import SVC
 
 BASE_DIR = '/Users/HwaLang/Desktop/python/T academy/Kaggle_camp/'
 
@@ -130,7 +130,6 @@ def make_submission(y_test_pred, val_loss):
     pass
 
 def main(params):
-    global num_columns, cat_columns
 
     # 데이터 경로 입력
     train_path = join(BASE_DIR, 'data', 'MDC14', 'train.csv')
@@ -139,13 +138,13 @@ def main(params):
     data = pd.read_csv(train_path)
     test = pd.read_csv(test_path)
 
+    data.fillna("NaN", inplace = True)
+    test.fillna("NaN", inplace = True)
+
     label = data['credit'] 
 
     data.drop(columns=['index', 'credit'], inplace=True)
     test.drop(columns=['index'], inplace=True) 
-
-    cat_columns = [c for (c, t) in zip(data.dtypes.index, data.dtypes) if t == 'O'] 
-    num_columns = [c for c in data.columns if c not in cat_columns]
 
     le = LabelEncoder()
     label = le.fit_transform(label)
@@ -165,19 +164,12 @@ def main(params):
 
         x_train, x_valid, x_test = preprocess(x_train, x_valid, test, params, y_train)
 
-        model = LGBMClassifier(n_estimators     = 1000000,
-                               subsample        = params['subsample'],
-                               max_depth        = params['max_depth'],
-                               colsample_bytree = params['colsample_bytree'],
-                               learning_rate    = params['lr'],
-                               boosting_type    = params['bst_type'],
-                               n_jobs           = 4)
-        
-        model.fit(x_train, y_train,
-                  eval_set=[[x_train, y_train], [x_valid, y_valid]],
-                  eval_metric='multi_logloss',
-                  early_stopping_rounds=100,
-                  verbose=100)
+        model = SVC(kernel      = params["kernel"],
+                    C           = params["C"],
+                    tol         = params["tol"],
+                    probability = True)
+
+        model.fit(x_train, y_train)
 
         valid_loss = log_loss(y_valid, model.predict_proba(x_valid))
 

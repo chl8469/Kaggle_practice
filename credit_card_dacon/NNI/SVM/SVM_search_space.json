@@ -1,0 +1,6 @@
+{
+    "kernel": {"_type":"choice", "_value":["rbf", "linear", "poly", "sigmoid"]},
+    "C": {"_type":"uniform", "_value":[0, 10]},
+    "tol" : {"_type":"loguniform", "_value":[0.00001, 1]},
+    "scaler": {"_type":"choice", "_value":["minmax", "standard"]}
+}

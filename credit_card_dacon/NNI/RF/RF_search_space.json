@@ -1,0 +1,8 @@
+{
+    "n_estimators": {"_type":"randint", "_value":[10, 10000]},
+    "max_depth": {"_type":"randint", "_value":[2, 20]},
+    "criterion": {"_type":"choice", "_value":["gini", "entropy"]},
+    "min_samples_leaf": {"_type":"randint", "_value":[1, 30]},
+    "min_samples_split": {"_type":"randint", "_value":[2, 30]},
+    "scaler": {"_type":"choice", "_value":["minmax", "standard"]}
+}
