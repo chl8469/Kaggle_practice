@@ -200,7 +200,7 @@ def main(params):
     is_model = int(best_model[0].split('.')[-2]) if best_model else False
 
     if is_model > cv_loss:
-        save_model(model, f"./model/LGBM_model{cv_loss:.4f}.pkl")
+        save_model(model, f"./model/SVM_model{cv_loss:.4f}.pkl")
 
 if __name__ == '__main__':
 
