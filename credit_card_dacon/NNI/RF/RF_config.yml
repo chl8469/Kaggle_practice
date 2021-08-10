@@ -2,7 +2,7 @@ experimentName: RandomForest classifier
 searchSpaceFile: RF_search_space.json
 trialCommand: python RF_trial.py
 trialCodeDirectory: .
-trialConcurrency: 6
+trialConcurrency: 4
 maxExperimentDuration: 48h
 maxTrialNumber: 99999
 tuner:

@@ -1,4 +1,7 @@
 from os.path import join
+from os import remove as remove_file
+import glob
+import pickle
 import multiprocessing
 
 n_cpus = multiprocessing.cpu_count()
@@ -129,6 +132,11 @@ def make_submission(y_test_pred, val_loss):
 
     pass
 
+def save_model(model, filename):
+    with open(filename, "wb") as f:
+        pickle.dump(model, f)
+
+
 def main(params):
 
     # 데이터 경로 입력
@@ -189,6 +197,23 @@ def main(params):
 
     make_submission(y_test_pred, cv_loss)
 
+    global best_model
+    best_model = glob.glob("./model/*.pkl")
+    
+    is_model = int(best_model[0].split('.')[-2]) if best_model else False
+
+    if is_model > cv_loss:
+        save_model(model, f"./model/RF_model{cv_loss:.4f}.pkl")
+
 if __name__ == '__main__':
+    
+    best_model = glob.glob("./model/*.pkl")
+    best_model.sort()
+    if len(best_model) > 3:
+        try:
+            [remove_file(_) for _ in best_model[3:]]
+        except Exception as e:
+            print(e)
+
     params = nni.get_next_parameter()
     main(params)
