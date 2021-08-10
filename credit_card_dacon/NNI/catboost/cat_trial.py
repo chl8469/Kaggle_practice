@@ -206,10 +206,10 @@ def main(params):
     global best_model
     best_model = glob.glob("./model/*.pkl")
     
-    is_model = int(best_model[0].split('.')[-2]) if best_model else False
+    is_model = int(best_model[0].split('.')[-2]) if best_model else 10
 
     if is_model > cv_loss:
-        save_model(model, f"./model/LGBM_model{cv_loss:.4f}.pkl")
+        save_model(model, f"./model/cat_model{cv_loss:.4f}.pkl")
 
 if __name__ == '__main__':
 
@@ -220,5 +220,6 @@ if __name__ == '__main__':
             [remove_file(_) for _ in best_model[3:]]
         except Exception as e:
             print(e)
+
     params = nni.get_next_parameter()
     main(params)

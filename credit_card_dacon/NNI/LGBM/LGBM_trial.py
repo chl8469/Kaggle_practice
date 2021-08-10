@@ -205,7 +205,7 @@ def main(params):
     global best_model
     best_model = glob.glob("./model/*.pkl")
     
-    is_model = int(best_model[0].split('.')[-2]) if best_model else False
+    is_model = int(best_model[0].split('.')[-2]) if best_model else 10
 
     if is_model > cv_loss:
         save_model(model, f"./model/LGBM_model{cv_loss:.4f}.pkl")
